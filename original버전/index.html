@@ -48,6 +48,7 @@
         top_p: 1,
         frequency_penalty: 0,
         presence_penalty: 0,
+        user : "user123456"
       }).then((result)=>{
         console.log(result.data.choices[0].text)
         var template = `<div class="line">
