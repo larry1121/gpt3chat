@@ -27,42 +27,34 @@
   <script type="module">
     import { Configuration, OpenAIApi } from 'https://cdn.skypack.dev/openai';
 
-    const DEFAULT_PARAMS = {
-"model": "text-davinci-002",
-"temperature": 0.7,
-"max_tokens": 256,
-"top_p": 1,
-"frequency_penalty": 0,
-"presence_penalty": 0
-}
     document.querySelector('#send').addEventListener('click', function(){
       var template = `<div class="line">
         <span class="chat-box mine">${ document.querySelector('#input').value }</span>
       </div>`
       document.querySelector('.chat-content').insertAdjacentHTML('beforeend', template);
 
-const openai_api_key="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"
+      
 
- async function query(params = {}) {
-  const params_ = { ...DEFAULT_PARAMS, ...params };
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' +openai_api_key
-    },
-    body: JSON.stringify(params_)
-  };
-  const response = await fetch('https://api.openai.com/v1/completions', requestOptions);
-  const data = await response.json();
+      const configuration = new Configuration({
+        apiKey: 'openai에서 발급받은 api key',
+      });
+      const openai = new OpenAIApi(configuration);
 
-  var template = `<div class="line">
-          <span class="chat-box">${ data.choices[0].text }</span>
+      openai.createCompletion({
+        model: "text-davinci-002",
+        prompt: document.querySelector('#input').value,
+        temperature: 0.7,
+        max_tokens: 256,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+      }).then((result)=>{
+        console.log(result.data.choices[0].text)
+        var template = `<div class="line">
+          <span class="chat-box">${ result.data.choices[0].text }</span>
         </div>`
         document.querySelector('.chat-content').insertAdjacentHTML('beforeend', template);
-  return data.choices[0].text;
-}
-query({"prompt": document.querySelector('#input').value})
+      })
 
     })
   </script>
