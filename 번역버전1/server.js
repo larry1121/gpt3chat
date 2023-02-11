@@ -4,7 +4,7 @@ var request = require('request');
 var { OpenAIApi, Configuration } = require('openai');
 
 let config = new Configuration({
-  apiKey: 'openai사이트에있던 apikey',
+  apiKey: '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',
 });
 let openai = new OpenAIApi(config);
 
@@ -14,8 +14,8 @@ app.get('/', function(req,res){
   res.sendFile(__dirname + '/index.html')
 })
 
-var client_id = '네이버api센터에서 발급받은 api id';
-var client_secret = '네이버api센터에서 발급받은 api secret';
+var client_id = 'C5s9jV1Y9_MikZ4vepuO';
+var client_secret = 'mvWL2fMa1R';
 
 app.get('/translate', function (req, res) {
    var api_url = 'https://openapi.naver.com/v1/papago/n2mt';
