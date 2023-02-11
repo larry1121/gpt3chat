@@ -26,6 +26,7 @@
 
   <script type="module">
     import { Configuration, OpenAIApi } from 'https://cdn.skypack.dev/openai';
+    require("dotenv").config();
 
     document.querySelector('#send').addEventListener('click', function(){
       var template = `<div class="line">
@@ -36,7 +37,7 @@
       
 
       const configuration = new Configuration({
-        apiKey: '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',
+        apiKey: process.env.OPENAI_API_KEY,
       });
       const openai = new OpenAIApi(configuration);
 
